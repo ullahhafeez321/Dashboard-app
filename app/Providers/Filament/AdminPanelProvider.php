@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\UserStats;
+use Filament\Enums\UserMenuPosition;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -18,6 +20,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Actions\Action;
+use App\Filament\Pages\Profile;
+use Filament\Facades\Filament;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,13 +40,23 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
+                Profile::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
+                // UserStats::class,
                 // FilamentInfoWidget::class,
             ])
-            ->middleware([
+            // ->userMenu(position: UserMenuPosition::Sidebar)  // to put in sidebar
+            ->userMenuItems([
+                Action::make('profile')
+                    ->label(fn (): string => Filament::auth()->user()->name)
+                    ->url(fn (): string => Profile::getUrl())
+                    ->icon('heroicon-s-user-circle')
+                    ->sort(-2), // place above the theme switch
+
+            ])->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
