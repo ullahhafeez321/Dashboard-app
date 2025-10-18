@@ -71,6 +71,6 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         // Only users with role 'admin' or 'manager' can log in to Filament
-        return in_array($this->role, ['admin', 'manager']);
+        return in_array($this->role, ['admin', 'superadmin']);
     }
 }
