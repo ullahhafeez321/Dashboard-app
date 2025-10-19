@@ -48,7 +48,8 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 // UserStats::class,
                 // FilamentInfoWidget::class,
-            ])
+            ])  
+            ->sidebarFullyCollapsibleOnDesktop()
             // ->userMenu(position: UserMenuPosition::Sidebar)  // to put in sidebar
             ->userMenuItems([
                 // Action::make('profile')

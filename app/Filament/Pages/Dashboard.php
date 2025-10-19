@@ -14,4 +14,6 @@ class Dashboard extends Page
 
     // ✅ This is static
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-home';
+
+    
 }
