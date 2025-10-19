@@ -46,19 +46,10 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                // UserStats::class,
-                // FilamentInfoWidget::class,
             ])  
-            ->sidebarFullyCollapsibleOnDesktop()
+            ->sidebarCollapsibleOnDesktop()
             // ->userMenu(position: UserMenuPosition::Sidebar)  // to put in sidebar
-            ->userMenuItems([
-                // Action::make('profile')
-                //     ->label(fn (): string => Filament::auth()->user()->name)
-                //     ->url(fn (): string => Profile::getUrl())
-                //     ->icon('heroicon-s-user-circle')
-                //     ->sort(-2), // place above the theme switch
-
-            ])->middleware([
+            ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
