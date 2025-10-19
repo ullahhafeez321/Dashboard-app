@@ -47,6 +47,8 @@ class AdminPanelProvider extends PanelProvider
             ])  
             ->sidebarCollapsibleOnDesktop()
             ->brandName('CRM Dashboard')
+            ->brandLogo('images/logo.png')
+            ->brandLogoHeight('3.2rem')
             // ->userMenu(position: UserMenuPosition::Sidebar)  // to put in sidebar
             ->middleware([
                 EncryptCookies::class,
