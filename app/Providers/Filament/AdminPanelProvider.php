@@ -2,8 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Widgets\UserStats;
-use Filament\Enums\UserMenuPosition;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -48,6 +46,7 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
             ])  
             ->sidebarCollapsibleOnDesktop()
+            ->brandName('CRM Dashboard')
             // ->userMenu(position: UserMenuPosition::Sidebar)  // to put in sidebar
             ->middleware([
                 EncryptCookies::class,
