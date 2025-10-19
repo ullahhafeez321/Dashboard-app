@@ -46,9 +46,9 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
             ])  
             ->sidebarCollapsibleOnDesktop()
-            ->brandName('CRM Dashboard')
-            ->brandLogo('images/logo.png')
-            ->brandLogoHeight('3.2rem')
+            // ->brandName('CRM Dashboard')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3.8rem')
             // ->userMenu(position: UserMenuPosition::Sidebar)  // to put in sidebar
             ->middleware([
                 EncryptCookies::class,
