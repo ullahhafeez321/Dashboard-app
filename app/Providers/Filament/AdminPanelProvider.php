@@ -11,6 +11,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
+use Firefly\FilamentBlog\Blog;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -49,7 +50,10 @@ class AdminPanelProvider extends PanelProvider
             // ->brandName('CRM Dashboard')
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3.8rem')
-            // ->userMenu(position: UserMenuPosition::Sidebar)  // to put in sidebar
+            // ->userMenu(position: UserMenuPosition::Sidebar)  // to put in 
+            ->plugins([
+                Blog::make(),
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
