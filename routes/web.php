@@ -22,7 +22,7 @@ Route::middleware([
 
 
 // ✅ Blog List Page
-Route::get('/blog', function () {
+Route::get('/blogs', function () {
     $posts = Post::where('status', 'published')
         ->where(function ($query) {
             $query->whereNull('published_at')

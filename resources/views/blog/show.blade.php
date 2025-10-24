@@ -53,47 +53,47 @@
 
             <!-- 🖋 Blog Body (with inline image fixes) -->
            <div class="post-body mb-4">
-    @php
-        $body = $post->body;
+            @php
+                $body = $post->body;
 
-        // 1️⃣ Replace Filament-style editor images (alt + data-id)
-        $body = preg_replace_callback(
-            '/alt="([^"]*)"\s+data-id="([^">]+)"/i',
-            function ($matches) {
-                $alt = trim($matches[1]);
-                $file = trim($matches[2]);
-                $src = asset('storage/' . ltrim($file, '/'));
-                return '<img src="' . e($src) . '" alt="' . e($alt) . '" class="img-fluid rounded shadow-sm my-4 w-100">';
-            },
-            $body
-        );
+                // 1️⃣ Replace Filament-style editor images (alt + data-id)
+                $body = preg_replace_callback(
+                    '/alt="([^"]*)"\s+data-id="([^">]+)"/i',
+                    function ($matches) {
+                        $alt = trim($matches[1]);
+                        $file = trim($matches[2]);
+                        $src = asset('storage/' . ltrim($file, '/'));
+                        return '<img src="' . e($src) . '" alt="' . e($alt) . '" class="img-fluid rounded shadow-sm my-4 w-100">';
+                    },
+                    $body
+                );
 
-        // 2️⃣ Replace normal <img src="..."> tags
-        $body = preg_replace_callback(
-            '/<img[^>]+src="([^">]+)"/i',
-            function ($matches) {
-                $src = trim($matches[1]);
-                if (!\Illuminate\Support\Str::startsWith($src, ['http://', 'https://', 'data:'])) {
-                    $src = asset('storage/' . ltrim(preg_replace('/^(public\/)?storage\//', '', $src), '/'));
-                }
-                return '<img src="' . e($src) . '" class="img-fluid rounded shadow-sm my-4 w-100">';
-            },
-            $body
-        );
+                // 2️⃣ Replace normal <img src="..."> tags
+                $body = preg_replace_callback(
+                    '/<img[^>]+src="([^">]+)"/i',
+                    function ($matches) {
+                        $src = trim($matches[1]);
+                        if (!\Illuminate\Support\Str::startsWith($src, ['http://', 'https://', 'data:'])) {
+                            $src = asset('storage/' . ltrim(preg_replace('/^(public\/)?storage\//', '', $src), '/'));
+                        }
+                        return '<img src="' . e($src) . '" class="img-fluid rounded shadow-sm my-4 w-100">';
+                    },
+                    $body
+                );
 
-        // 3️⃣ Remove leftover junk like > class="..." and extra >
-        $body = preg_replace([
-            '/\s*alt="[^"]*"/i',
-            '/\s*data-id="[^"]*"/i',
-            '/>\s*class="[^"]*"\s*>?/',
-            '/>{2,}/',
-            '/\s+>$/m'
-        ], '>', $body);
+                // 3️⃣ Remove leftover junk like > class="..." and extra >
+                $body = preg_replace([
+                    '/\s*alt="[^"]*"/i',
+                    '/\s*data-id="[^"]*"/i',
+                    '/>\s*class="[^"]*"\s*>?/',
+                    '/>{2,}/',
+                    '/\s+>$/m'
+                ], '>', $body);
 
-    @endphp
+            @endphp
 
-    {!! $body !!}
-</div>
+            {!! $body !!}
+        </div>
 
 
             <!-- 🏷 Categories -->
